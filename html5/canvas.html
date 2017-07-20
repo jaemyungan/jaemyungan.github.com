@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>flex</title>
+<link rel="stylesheet" type="text/css" href="css/common.css" />
+ </head>
+<style type="text/css">
+	canvas{width:400px;height:400px;border:1px solid #457ff5;border-radius:10px;}
+</style>
+<script type="text/javascript">
+	//페이지 로드이벤트
+	window.addEventListener('load', function() {
+
+		//canvas개체를 가져와서
+		var canvas = document.querySelector("canvas");
+		//var canvas = document.getElementById("canvas");
+
+		//현재브라우저가 canvas를 지원하는지에 대한 예외처리
+		if(!canvas || !canvas.getContext){
+			return; //또는 alert('canvas 요소를 지원하지 않습니다.')
+		}
+
+		//canvas의 getContext 함수를 통해서 Context객체생성
+		var ctx = canvas.getContext('2d');
+		if(!ctx){
+			return; // 또는 alret('2d컨텍스트메뉴를 지원하지 않습니다.');
+		}
+
+		// ctx를 통해서 원하는 도형그리기
+		//그라디언트 사각형그리기
+		var gradient = ctx.createLinearGradient(0, 0, 200, 100);
+		gradient.addColorStop(0, 'red');
+		gradient.addColorStop(1, 'blue');
+		ctx.fillStyle = gradient;
+		ctx.fillRect(10, 10, 100, 100); //사각형그리기
+
+	}, false);
+
+		var onload = function() {}
+
+ </script>
+ <body>
+ 
+  <canvas id="canvas">
+  
+  </canvas>
+ </body>
+</html>

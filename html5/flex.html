@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+ <head>
+  <title> new document </title>
+<link rel="stylesheet" type="text/css" href="css/common.css" />
+<link rel="stylesheet" type="text/css" href="css/flex.css" />
+<style type="text/css">
+*{box-sizing:border-box;margin: 0 0 0 0;padding:0 0;}
+	html, body{height:100%;}
+	.container{
+		display:flex;
+		display:-webkit-flex;
+		display:-webkit-box;/*safari*/
+	
+	flex-wrap:wrap;
+	-webkit-flex-wrap: wrap; /* safari 6.1 -webkit-이상 */
+
+
+
+	flex-direction:column;-webkit-flex-direction:column;-webkit-box-orient: vertical;  -ms-flex-direction: column;
+
+
+	 -webkit-box-align:justify;
+
+
+	height:100%;background:skyblue;
+}
+	.container .item{background:yellow;width:100px;border:1px solid #ccc;}
+	.container .item:last-child{
+			display:flex;
+		display:-webkit-flex;
+		display:-webkit-box;/*safari*/
+	flex:1;-webkit-box-flex:1;
+	
+flex-direction:row;
+-webkit-flex-direction:row;
+-ms-flex-direction: row;
+-webkit-box-orient: horizontal; /*safari*/
+
+	
+	}
+
+		.container .item:last-child .div2{
+		flex:1;
+-ms-flex:1
+-webkit-flex: 1;
+-webkit-box-flex:1;/*safari*/
+		}
+</style>
+ </head>
+
+ <body>
+	 <div class="container">
+		<div class="item">item1
+			<div>1</div>
+			<div>2</div>
+			<div>3</div>
+		</div>
+		<div class="item">item2</div>
+		<div class="item">item3</div>
+		<div class="item">item4</div>
+		<div class="item">item5
+			<div class="div" style="background:green">3</div>
+			<div class="div2" style="background:green">2</div>
+		</div>
+	 </div> 
+ </body>
+</html>

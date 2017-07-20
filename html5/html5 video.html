@@ -1,0 +1,146 @@
+소스 -------------------------
+
+<video width="320" height="240" poster="poster.png"controls preload="false">
+ //controls는 플레이버튼 등이 나오는 컨트롤패널을 보일지, 말지 정하는 것인데요, boolean값이므로 예스, 노 써줘야하는데 안쓰면 기본적으로 예스로 인정.
+ //poster에 동영상이 재생되기전 미리보기 형태의 이미지를 지정 또는 대체이미지
+
+ <source src="myVideo.mp4" type="video/mp4" codecs="avc1.42E01E, mp4a.40.2" />
+  <source src="myVideo.ogv" type="video/webm" codecs="vp8, vorbis" />
+  <source src="myVideo.ogv" type="video/ogg" codecs="theora, vorbis" />
+
+ <object>
+   하위호환성을 위해 넣어줌. 플래시, 나 대체 텍스트등
+ </object> </video>
+
+
+그리고 브라우저별로 채택한 비디오코덱입니다.-------------------------
+(1) MS 와 Apple 은 사이좋게(?) H.264 codec 을 채택
+-높은 질 덕분에, 점점 고화질의 온라인동영상이 많아지는 분위기에서 가장 높은 점수획득!
+http://handbrake.fr 사이트에서 wav, wmv를 H.264 codec에 맞춰 mp4로 변환할 수 있습니다.
+
+
+(2) Firefox 와 Opera 는 Ogg Theora format 을 채택
+- 질적인 면에서 H.264 만은 못하지만,
+- 오픈소스라서 누구나 써보고 있는 상황입니다.
+http://firefogg.org 사이트에서 변환 가능하구요. (파이어폭스는 미리 깔고요)
+  
+
+(3) Google 은 VP8 Video Codec 을 채택
+- 높은 동영상 품질
+- 오픈소스
+- 얼마전엔 Mozilla(Firefox)진영도 구글 팔짱을 끼었죠.
+http://www.webmproject.org 사이트에서 정보도 얻고, 파일 변환도 가능합니다.
+
+
+HTML5 <video>에 관심이 많다면 얼른 아래 사이트를 즐겨찾기
+http://videojs.com
+http://www.html5video.org
+http://www.diveintohtml5.org/video.html
+
+
+  
+
+스크립트로제어 -------------------------
+
+<script type="text/javascript">
+ var v = document.getElementById("movie");
+ v.onclick = function(){
+  if(v.paused){
+   v.play();
+  }else{
+   v.pause(); 
+  }
+ }
+
+또는,
+var video = document.querySelector('audio');
+ video.play(); //재생
+video.pause(); //일시정지
+</script>
+
+ 
+
+브라우저 사이즈조절때마다 비디오사이즈절------------------------------
+
+window.addEventListener("resize", resized, false)
+ function resized(){
+  var _vid = document.querySelector("video");
+  _vid.style.position = "fixed";
+  _vid.style.width = window.innerWidth + "px";
+  _vid.style.height = window.innerHeight + "px";
+  _vid.style.zIndex = 100;
+
+}
+
+ 
+
+자바스크립트로 동적으로 비디오 플레이어만들기-------------------------------------------
+
+  <script type="text/javascript">
+  var player; //video 개체에대한참조
+ var speed = 1; //속도 1, 2, 0.5
+  var progress = ""; //플레이정보메세지
+ var placeholder;
+  
+  //플레이어 생성
+ function loadVideo(){
+   placeholder= document.getElementById("placeholder"); //동영상들어갈자리
+  progress= document.getElementById("progess");//메세지 출력자리
+
+  //플레이어 생성
+  player = document.createElement("video"); //video태그 생성
+  placeholder.appendChild(player); //placeholder의 자식개체로 player추가
+  //소스태그추가
+  var source = document.createElement("source");
+   source.src = 'videotest.mp4';
+   source.type = 'videotest.mp4, codecs="avc1.42E01E, mp4a.40.2"';
+   player.insertBefore(source, player.firstChild);
+
+  //setting
+   player.controls = true;
+   player.width = 800;
+   player.loop = "true";
+   player.preload = "auto";
+
+  //Add Event
+   player.addEventListener('timeupdate', onTimeUpdate, false);
+  }
+
+ function onTimeUpdate(){
+   var currentTime  = player.currentTime //현재시간
+  progess.innerHTML = "현재시간" + FormatTime(currentTime);
+  }
+
+ function FormatTime(t){
+   var m = parseInt(t /60 ) % 60;
+   var s= Math.round(t % 60);
+   return (m < 10 ? "0" + m:m) + ":" + (s<10 ? "0" + s:s);
+  }
+
+ //속도조절 함수
+ function ChangeSpeed(factor){
+   speed = speed * factor; // speed = 1*2 or 2*0.5
+   player.playbackRate = speed;
+  }
+
+ //음소거 함수
+ function muteOrUnmute(factor){
+   player.muted = !player.muted; //토글기능 현재상태 부정
+ }
+  //IE9에서 개발자도구 콘솔에 추가정보 출력
+ function Log(msg){
+   if(window.console)
+    window.console.log(msg);
+  }
+ </script>
+
+
+ <input type="button" id="btnLoad" value="Load Video" onclick="loadVideo()" />
+ <input type="button" id="btnPlay" value="Play" onclick="player.play()" />
+ <input type="button" id="btnPause" value="Pause" onclick="player.pause()" />
+ <input type="button" id="btnSpeedUp" value="Speed++" onclick="ChangeSpeed(2)" />
+ <input type="button" id="btnSpeedDown" value="Speed--" onclick="ChangeSpeed(0.5)" />
+ <input type="button" id="btnMute" value="Mute/Unmute" onclick="muteOrUnmute()" />
+ <div id="placeholder"></div>
+ <label id="progess"></label>
+

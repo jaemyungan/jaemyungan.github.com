@@ -1,0 +1,361 @@
+ HTML5 지원여부 확인하기 (Modernizr)
+
+
+ 
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="euc-kr">
+
+<title>HTML5 test</title>
+
+<style>
+
+<!--
+
+.supported {
+
+width:300px;
+
+border:1px solid #e3e3e3;
+
+padding : 5px;
+
+font-family : Arial;
+
+font-size:0.9em;
+
+line-height:160%;
+
+}
+
+-->
+
+</style>
+
+<script src="modernizr.js"></script>
+
+<script language="javascript">
+
+function supportTest() {
+
+var resultStr = "";
+
+var outDiv = document.getElementById("result");
+
+ 
+
+// canvas
+
+outDiv.appendChild(document.createTextNode(
+
+supportedFunction("canvas", Modernizr.canvas)));
+
+outDiv.appendChild(document.createElement("br"));
+
+ 
+
+// canvas text
+
+outDiv.appendChild(document.createTextNode(
+
+supportedFunction("canvas text", Modernizr.canvastext)));
+
+outDiv.appendChild(document.createElement("br"));
+
+ 
+
+// video
+
+outDiv.appendChild(document.createTextNode(
+
+supportedFunction("video", Modernizr.video)));
+
+outDiv.appendChild(document.createElement("br"));
+
+ 
+
+// video type
+
+outDiv.appendChild(document.createTextNode(
+
+supportedFunction("* video type - ogg", Modernizr.video.ogg)));
+
+outDiv.appendChild(document.createElement("br"));
+
+outDiv.appendChild(document.createTextNode(
+
+supportedFunction("* video type - h264", Modernizr.video.h264)));
+
+outDiv.appendChild(document.createElement("br"));
+
+outDiv.appendChild(document.createTextNode(
+
+supportedFunction("* video type - mpeg", Modernizr.video.mpeg)));
+
+outDiv.appendChild(document.createElement("br"));
+
+ 
+
+// local storage
+
+outDiv.appendChild(document.createTextNode(
+
+supportedFunction("local storage", Modernizr.localstorage)));
+
+outDiv.appendChild(document.createElement("br"));
+
+ 
+
+// web worker
+
+outDiv.appendChild(document.createTextNode(
+
+supportedFunction("webworkers", Modernizr.webworkers)));
+
+outDiv.appendChild(document.createElement("br"));
+
+ 
+
+// offline web application (applicationCache)
+
+outDiv.appendChild(document.createTextNode(
+
+supportedFunction("application cache", Modernizr.applicationcache)));
+
+outDiv.appendChild(document.createElement("br"));
+
+ 
+
+// location
+
+outDiv.appendChild(document.createTextNode(
+
+supportedFunction("location", Modernizr.geolocation)));
+
+outDiv.appendChild(document.createElement("br"));
+
+ 
+
+// placeholder
+
+outDiv.appendChild(document.createTextNode(
+
+supportedFunction("place holder", Modernizr.input.placeholder)));
+
+outDiv.appendChild(document.createElement("br"));
+
+ 
+
+// autofocus
+
+outDiv.appendChild(document.createTextNode(
+
+supportedFunction("auto focus", Modernizr.input.autofocus)));
+
+outDiv.appendChild(document.createElement("br"));
+
+ 
+
+// micro data
+
+// Modernizr가 지원하지 않음
+
+outDiv.appendChild(document.createTextNode(
+
+supportedFunction("micro data", !!document.getItems)));
+
+outDiv.appendChild(document.createElement("br"));
+
+ 
+
+// input type - search
+
+outDiv.appendChild(document.createTextNode(
+
+supportedFunction("input type - search", Modernizr.inputtypes.search)));
+
+outDiv.appendChild(document.createElement("br"));
+
+ 
+
+// input type - number
+
+outDiv.appendChild(document.createTextNode(
+
+supportedFunction("input type - number", Modernizr.inputtypes.number)));
+
+outDiv.appendChild(document.createElement("br"));
+
+ 
+
+// input type - range
+
+outDiv.appendChild(document.createTextNode(
+
+supportedFunction("input type - range", Modernizr.inputtypes.range)));
+
+outDiv.appendChild(document.createElement("br"));
+
+ 
+
+// input type - color
+
+outDiv.appendChild(document.createTextNode(
+
+supportedFunction("input type - color", Modernizr.inputtypes.color)));
+
+outDiv.appendChild(document.createElement("br"));
+
+ 
+
+// input type - tel
+
+outDiv.appendChild(document.createTextNode(
+
+supportedFunction("input type - tel", Modernizr.inputtypes.tel)));
+
+outDiv.appendChild(document.createElement("br"));
+
+ 
+
+// input type - url
+
+outDiv.appendChild(document.createTextNode(
+
+supportedFunction("input type - url", Modernizr.inputtypes.url)));
+
+outDiv.appendChild(document.createElement("br"));
+
+ 
+
+// input type - email
+
+outDiv.appendChild(document.createTextNode(
+
+supportedFunction("input type - email", Modernizr.inputtypes.email)));
+
+outDiv.appendChild(document.createElement("br"));
+
+ 
+
+// input type - date
+
+outDiv.appendChild(document.createTextNode(
+
+supportedFunction("input type - date", Modernizr.inputtypes.date)));
+
+outDiv.appendChild(document.createElement("br"));
+
+ 
+
+// input type - month
+
+outDiv.appendChild(document.createTextNode(
+
+supportedFunction("input type - month", Modernizr.inputtypes.month)));
+
+outDiv.appendChild(document.createElement("br"));
+
+ 
+
+// input type - week
+
+outDiv.appendChild(document.createTextNode(
+
+supportedFunction("input type - week", Modernizr.inputtypes.week)));
+
+outDiv.appendChild(document.createElement("br"));
+
+ 
+
+// input type - datetime
+
+outDiv.appendChild(document.createTextNode(
+
+supportedFunction("input type - datetime", Modernizr.inputtypes.datetime)));
+
+outDiv.appendChild(document.createElement("br"));
+
+ 
+
+// input type - datetime-local
+
+outDiv.appendChild(document.createTextNode(
+
+supportedFunction("input type - datetime-local", Modernizr.inputtypes.datetimelocal)));
+
+outDiv.appendChild(document.createElement("br"));
+
+}
+
+ 
+
+// 결과를 문자열로 표현
+
+function supportedFunction(name, supported) {
+
+var resultStr = name + " : ";
+
+ 
+
+if(supported) {
+
+resultStr += "O";
+
+}
+
+else {
+
+resultStr += "X";
+
+}
+
+ 
+
+return resultStr;
+
+}
+
+</script>
+
+</head>
+
+<body onload="javascript:supportTest()">
+
+<div id="result" class="supported">
+
+ 
+
+</div>
+
+</body>
+
+<html>
+
+ 
+
+[html5] 신기능 지원 여부 확인 사이트 standardista
+
+http://www.standardista.com/css3/css3-background-properties/
+
+ 
+
+ 
+
+css3 미디어쿼리 하위브라우저 크로스 브라우징
+
+<!--[if lt IE 9]>
+
+<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+
+<![endif]-->
+
+구버전 브라우저 6,7,8 에서는 미디어쿼리 구문이 정상적으로 활성화 되지않기 때문에
+
+
+위와같은 css3의 미디어쿼리 를 정상적으로 작동하게끔 하는 스크립트 구문을 삽입해줍니다.
